@@ -21,4 +21,7 @@ public interface ImageAPI {
     @GET("search")
     Call<ResponseBody> search2(@Query("q") String query);
 
+    @GET("/student/login")
+    Observable<HttpResult> login(@Query("phone") String phone,  @Query("password") String psw);
+
 }

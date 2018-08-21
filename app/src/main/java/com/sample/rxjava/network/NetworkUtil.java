@@ -1,7 +1,7 @@
 package com.sample.rxjava.network;
 
 import com.sample.rxjava.network.api.FakeApi;
-import com.sample.rxjava.network.api.ImageAPI;
+import com.sample.rxjava.network.api.RefulAPI;
 
 import okhttp3.OkHttpClient;
 import retrofit2.CallAdapter;
@@ -18,9 +18,9 @@ public class NetworkUtil {
     private static OkHttpClient okHttpClient = new OkHttpClient();
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJava2CallAdapterFactory.create();
-    private static ImageAPI image=null;
+    private static RefulAPI image=null;
     private static FakeApi fakeApi=null;
-    public static ImageAPI getImageApi(){
+    public static RefulAPI getImageApi(){
         if (image == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .client(okHttpClient)
@@ -28,7 +28,7 @@ public class NetworkUtil {
                     .addConverterFactory(gsonConverterFactory)
                     .addCallAdapterFactory(rxJavaCallAdapterFactory)
                     .build();
-            image = retrofit.create(ImageAPI.class);
+            image = retrofit.create(RefulAPI.class);
         }
         return image;
 

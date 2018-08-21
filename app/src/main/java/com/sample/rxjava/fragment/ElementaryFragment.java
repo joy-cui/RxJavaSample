@@ -15,10 +15,17 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.sample.rxjava.MainActivity;
 import com.sample.rxjava.R;
 import com.sample.rxjava.adapter.ElementListAdapter;
+import com.sample.rxjava.entry.HttpResult;
 import com.sample.rxjava.entry.Image;
+import com.sample.rxjava.entry.Subject;
 import com.sample.rxjava.network.NetworkUtil;
+import com.sample.rxjava.network.api.ApiService;
+import com.sample.rxjava.subscriber.ProgressSubscriber;
+import com.sample.rxjava.subscriber.SubscriberOnNextListener;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -49,7 +56,7 @@ public class ElementaryFragment extends BaseFragment {
     private String TAG="ElementaryFragment";
     @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.gridRv) RecyclerView gridRv;
-
+    private SubscriberOnNextListener onNextListener;
     ElementListAdapter adapter = new ElementListAdapter();
 
 
@@ -124,7 +131,7 @@ public class ElementaryFragment extends BaseFragment {
                     ResponseBody body = (ResponseBody) response.body();
                     if (body != null) {
                         String bodyStr=response.body().string();
-                        Log.e(TAG, "map:转换前:" + bodyStr);
+//                        Log.e(TAG, "map:转换前:" + bodyStr);
 //                        return new Gson().fromJson(body.string(), MobileAddress.class);
                         return bodyStr;
                     }
@@ -135,19 +142,27 @@ public class ElementaryFragment extends BaseFragment {
                 .doOnNext(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        Log.e(TAG, "doOnNext: 保存成功：" + s + "\n");
+//                        Log.e(TAG, "doOnNext: 保存成功：" + s + "\n");
                     }
                 }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String data) throws Exception {
-                        Log.e(TAG, "成功:" + data + "\n");
+//                        Log.e(TAG, "成功:" + data + "\n");
                     }
                     });
 
-
+        //封装
+        onNextListener= new SubscriberOnNextListener<List<Subject> >() {
+            @Override
+            public void onNext(List<Subject> subjects) {
+               Log.e(TAG,"SubscriberOnNextListener..."+subjects.get(0).getTitle());
+            }
+        };
+        ApiService.getInstance().getTopMovie(new ProgressSubscriber(onNextListener, getActivity()), 0, 10);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         Log.e(TAG,"onCreateView....");

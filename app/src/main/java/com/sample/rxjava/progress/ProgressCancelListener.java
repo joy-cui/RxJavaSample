@@ -5,4 +5,6 @@ package com.sample.rxjava.progress;
  */
 
 public interface ProgressCancelListener {
+    void onCancelProgress();
+
 }

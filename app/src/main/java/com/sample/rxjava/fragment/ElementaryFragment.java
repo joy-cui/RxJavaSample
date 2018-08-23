@@ -1,6 +1,5 @@
 package com.sample.rxjava.fragment;
 
-import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,11 +13,8 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.sample.rxjava.MainActivity;
 import com.sample.rxjava.R;
 import com.sample.rxjava.adapter.ElementListAdapter;
-import com.sample.rxjava.entry.HttpResult;
 import com.sample.rxjava.entry.Image;
 import com.sample.rxjava.entry.Subject;
 import com.sample.rxjava.network.NetworkUtil;
@@ -27,7 +23,6 @@ import com.sample.rxjava.subscriber.ProgressSubscriber;
 import com.sample.rxjava.subscriber.SubscriberOnNextListener;
 
 
-import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;

@@ -1,4 +1,4 @@
-package com.sample.rxjava;
+package com.sample;
 
 import android.app.Fragment;
 import android.support.design.widget.TabLayout;
@@ -8,13 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toolbar;
 
+import com.sample.rxjava.R;
 import com.sample.rxjava.fragment.ElementaryFragment;
 import com.sample.rxjava.fragment.TokenFlatMapFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class RxJavaMainActivity extends AppCompatActivity {
     @BindView(android.R.id.tabs) TabLayout tabLayout;
     @BindView(R.id.viewPager) ViewPager viewPager;
 //    @BindView(R.id.toolBar) Toolbar toolBar;
